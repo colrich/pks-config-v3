@@ -1,0 +1,61 @@
+az-configuration: []
+iaas-configurations:
+- additional_cloud_properties: {}
+  bosh_disk_path: ((iaas-configurations_0_bosh_disk_path))
+  bosh_template_folder: ((iaas-configurations_0_bosh_template_folder))
+  bosh_vm_folder: ((iaas-configurations_0_bosh_vm_folder))
+  datacenter: ((iaas-configurations_0_datacenter))
+  disk_type: ((iaas-configurations_0_disk_type))
+  ephemeral_datastores_string: ((iaas-configurations_0_ephemeral_datastores_string))
+  name: ((iaas-configurations_0_name))
+  nsx_networking_enabled: ((iaas-configurations_0_nsx_networking_enabled))
+  persistent_datastores_string: ((iaas-configurations_0_persistent_datastores_string))
+  ssl_verification_enabled: ((iaas-configurations_0_ssl_verification_enabled))
+  vcenter_host: ((iaas-configurations_0_vcenter_host))
+  vcenter_username: ((iaas-configurations_0_vcenter_username))
+network-assignment:
+  other_availability_zones: []
+networks-configuration:
+  icmp_checks_enabled: true
+  networks: []
+properties-configuration:
+  director_configuration:
+    blobstore_type: local
+    bosh_recreate_on_next_deploy: false
+    bosh_recreate_persistent_disks_on_next_deploy: false
+    database_type: internal
+    director_worker_count: 5
+    encryption: []
+    hm_emailer_options:
+      enabled: false
+    hm_pager_duty_options:
+      enabled: false
+    identification_tags: {}
+    job_configuration_on_tmpfs: false
+    keep_unreachable_vms: false
+    local_blobstore_options:
+      tls_enabled: true
+    ntp_servers_string: ""
+    post_deploy_enabled: false
+    resurrector_enabled: false
+    retry_bosh_deploys: false
+    skip_director_drain: false
+  dns_configuration: []
+  security_configuration:
+    generate_vm_passwords: ((properties-configuration_security_configuration_generate_vm_passwords))
+    opsmanager_root_ca_trusted_certs: false
+  syslog_configuration:
+    enabled: false
+resource-configuration:
+  compilation:
+    instances: automatic
+    instance_type:
+      id: automatic
+  director:
+    instances: automatic
+    persistent_disk:
+      size_mb: automatic
+    instance_type:
+      id: automatic
+vmextensions-configuration: []
+

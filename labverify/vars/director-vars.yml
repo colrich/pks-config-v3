@@ -1,0 +1,63 @@
+---
+az-configuration:
+- name: AZ1
+  clusters:
+  - cluster: PCF-Cluster
+    resource_pool: pks-v3-pipe
+  iaas_configuration_guid: 1ba2838ee930b48a5172
+network-assignment:
+  network: pks-infra
+  singleton_availability_zone: AZ1
+networks-configuration:
+  icmp_checks_enabled: false
+  networks:
+  - name: pks-infra
+    subnets:
+    - iaas_identifier: VM Network
+      cidr: 10.88.0.0/16
+      dns: 1.1.1.1,8.8.8.8
+      gateway: 10.88.0.1
+      reserved_ip_ranges: 10.88.0.1-10.88.32.10,10.88.33.1-10.88.255.255
+      availability_zone_names:
+      - AZ1
+  - name: pks-services
+    subnets:
+    - iaas_identifier: VM Network
+      cidr: 10.88.0.0/16
+      dns: 1.1.1.1,8.8.8.8
+      gateway: 10.88.0.1
+      reserved_ip_ranges: 10.88.0.1-10.88.33.10,10.88.34.1-10.88.255.255
+      availability_zone_names:
+      - AZ1
+properties-configuration:
+  director_configuration:
+    blobstore_type: local
+    database_type: internal
+    ntp_servers_string: 0.north-america.pool.ntp.org
+    post_deploy_enabled: true
+    resurrector_enabled: true
+  dns_configuration:
+  iaas_configuration:
+    bosh_disk_path: pks14_disks
+    bosh_template_folder: pks14_templates
+    bosh_vm_folder: pks14_vms
+    datacenter: DearbornRoad
+    disk_type: thin
+    ephemeral_datastores_string: pcf-datastore
+    persistent_datastores_string: pcf-datastore
+    guid: 1ba2838ee930b48a5172
+    name: default
+    ssl_verification_enabled: false
+    vcenter_host: vcenter.21dr.gridbug.io
+    vcenter_username: ((vcenter_user.username))
+    vcenter_password: ((vcenter_user.password))
+  security_configuration:
+    generate_vm_passwords: true
+    opsmanager_root_ca_trusted_certs: true
+  syslog_configuration:
+    enabled: false
+resource-configuration:
+  director:
+    instances: automatic
+    persistent_disk: "102400"
+    instance_type: automatic

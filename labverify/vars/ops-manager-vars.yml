@@ -1,0 +1,26 @@
+---
+vsphere:
+  vcenter:
+    url: https://vcenter.21dr.gridbug.io
+    username: ((vcenter_user.username))
+    password: ((vcenter_user.password))
+    datastore: pcf-datastore
+    ca_cert: ""
+    host: 10.88.1.1                                  # optional, vCenter host to deploy Ops Manager in
+    datacenter: DearbornRoad
+    resource_pool: pks-v3-pipe   # or /<Data Center Name>/host/<Cluster Name>
+    folder: pipelinevms                # /<Data Center Name>/vms/<Folder>
+    insecure: 1                               # default: 0 (secure); 1 (insecure)
+  disk_type: thin                            # example: thin|thick
+  private_ip: 10.88.30.2
+  dns: 1.1.1.1,8.8.8.8
+  ntp: 0.north-america.pool.ntp.org                    # example: ntp.ubuntu.com
+  ssh_password: ((ssh_password))
+  ssh_public_key: ""                          # for OpsManager >= 2.3
+  hostname: opsman-2.5-v
+  network: VM Network              # vcenter network to deploy to
+  netmask: 255.255.0.0
+  gateway: 10.88.0.1
+  vm_name: ops-manager-v                        # default: Ops_Manager
+  memory: 8                                   # default: 8 GB
+  cpu: 1                                      # default: 1

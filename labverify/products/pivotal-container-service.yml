@@ -1,0 +1,127 @@
+---
+
+# Product: pivotal-container-service
+
+# Notes:
+# 1. This is the sample product config file for Pivotal Container Service (PKS), with NSX-T, on vSphere IaaS
+# 2. The variables may vary for different IaaSes and configuration preference
+# 3. It's recommended to establish the config baseline by generating the staged config and parameterizing it for futher upgrade/patch
+
+product-name: pivotal-container-service
+product-properties:
+  .pivotal-container-service.pks_tls:
+    value:
+      cert_pem: ((product-properties.pks_tls.certificate))
+      private_key_pem: ((product-properties.pks_tls.private_key))
+  .properties.cloud_provider:
+    value: ((product-properties.properties.cloud_provider.type))
+  .properties.cloud_provider.vsphere.vcenter_dc:
+    value: ((product-properties.properties.cloud_provider.vsphere.vcenter_dc))
+  .properties.cloud_provider.vsphere.vcenter_ds:
+    value: ((product-properties.properties.cloud_provider.vsphere.vcenter_ds))
+  .properties.cloud_provider.vsphere.vcenter_ip:
+    value: ((product-properties.properties.cloud_provider.vsphere.vcenter_ip))
+  .properties.cloud_provider.vsphere.vcenter_master_creds:
+    value:
+      identity: ((product-properties.properties.cloud_provider.vsphere.vcenter_master_creds.identity))
+      password: ((product-properties.properties.cloud_provider.vsphere.vcenter_master_creds.password))
+  .properties.cloud_provider.vsphere.vcenter_vms:
+    value: ((product-properties.properties.cloud_provider.vsphere.vcenter_vms))
+  .properties.log_sink_resources_deploy:
+    value: ((product-properties.properties.log_sink_resources_deploy))
+  .properties.metric_sink_resources_deploy:
+    value: ((product-properties.properties.metric_sink_resources_deploy))
+  .properties.network_selector:
+    value: ((product-properties.properties.network_selector.type))
+  .properties.network_selector.flannel.pod_network_cidr:
+    value: ((product-properties.properties.network_selector.flannel.pod_network_cidr))
+  .properties.network_selector.flannel.service_cluster_cidr:
+    value: ((product-properties.properties.network_selector.flannel.service_cluster_cidr))
+  .properties.pks-vrli:
+    value: ((product-properties.properties.pks-vrli))
+  .properties.pks-vrops:
+    value: ((product-properties.properties.pks-vrops))
+  .properties.pks_api_hostname:
+    value: ((product-properties.properties.pks_api_hostname))
+  .properties.plan1_selector:
+    value: ((product-properties.properties.plan1_selector.status))
+  .properties.plan1_selector.active.allow_privileged_containers:
+    value: ((product-properties.properties.plan1_selector.active.allow_privileged_containers))
+  .properties.plan1_selector.active.description:
+    value: ((product-properties.properties.plan1_selector.active.description))
+  .properties.plan1_selector.active.master_az_placement:
+    value: ((product-properties.properties.plan1_selector.active.master_az_placement))
+  .properties.plan1_selector.active.master_instances:
+    value: ((product-properties.properties.plan1_selector.active.master_instances))
+  .properties.plan1_selector.active.max_worker_instances:
+    value: ((product-properties.properties.plan1_selector.active.max_worker_instances))
+  .properties.plan1_selector.active.name:
+    value: ((product-properties.properties.plan1_selector.active.name))
+  .properties.plan1_selector.active.worker_az_placement:
+    value: ((product-properties.properties.plan1_selector.active.worker_az_placement))
+  .properties.plan1_selector.active.worker_instances:
+    value: ((product-properties.properties.plan1_selector.active.worker_instances))
+  .properties.plan2_selector:
+    value: ((product-properties.properties.plan2_selector.status))
+  .properties.plan3_selector:
+    value: ((product-properties.properties.plan3_selector.status))
+  .properties.plan4_selector:
+    value: ((product-properties.properties.plan4_selector.status))
+  .properties.plan5_selector:
+    value: ((product-properties.properties.plan5_selector.status))
+  .properties.plan6_selector:
+    value: ((product-properties.properties.plan6_selector.status))
+  .properties.plan7_selector:
+    value: ((product-properties.properties.plan7_selector.status))
+  .properties.plan8_selector:
+    value: ((product-properties.properties.plan8_selector.status))
+  .properties.plan9_selector:
+    value: ((product-properties.properties.plan9_selector.status))
+  .properties.plan10_selector:
+    value: ((product-properties.properties.plan10_selector.status))
+  .properties.proxy_selector:
+    value: ((product-properties.properties.proxy_selector))
+  .properties.syslog_selector:
+    value: ((product-properties.properties.syslog_selector))
+  .properties.telemetry_selector: 
+   value: ((product-properties.properties.telemetry_selector))
+  .properties.uaa:
+    value: ((product-properties.properties.uaa))
+  .properties.uaa_oidc:
+    value: ((product-properties.properties.uaa_oidc))
+  .properties.uaa_pks_cli_access_token_lifetime:
+    value: ((product-properties.properties.uaa_pks_cli_access_token_lifetime))
+  .properties.uaa_pks_cli_refresh_token_lifetime:
+    value: ((product-properties.properties.uaa_pks_cli_refresh_token_lifetime))
+  .properties.wavefront:
+    value: ((product-properties.properties.wavefront))
+  .properties.worker_max_in_flight:
+    value: ((product-properties.properties.worker_max_in_flight))
+network-properties:
+  network:
+    name: ((network-properties.network.name))
+  other_availability_zones: ((network-properties.other_availability_zones))
+  service_network:
+    name: ((network-properties.service_network.name))
+  singleton_availability_zone:
+    name: ((network-properties.singleton_availability_zone.name))
+resource-config:
+  pivotal-container-service:
+    instances: ((resource-config.pivotal-container-service.instances))
+    persistent_disk:
+      size_mb: ((resource-config.pivotal-container-service.persistent_disk))
+    instance_type:
+      id: ((resource-config.pivotal-container-service.instance_type))
+errand-config:
+  delete-all-clusters:
+    pre-delete-state: ((errand-config.delete-all-clusters))
+  pks-nsx-t-precheck:
+    post-deploy-state: ((errand-config.pks-nsx-t-precheck))
+  smoke-tests:
+    post-deploy-state: ((errand-config.smoke-tests))
+  upgrade-all-service-instances:
+    post-deploy-state: ((errand-config.upgrade-all-service-instances))
+  wavefront-alert-creation:
+    post-deploy-state: ((errand-config.wavefront-alert-creation))
+  wavefront-alert-deletion:
+    pre-delete-state: ((errand-config.wavefront-alert-deletion))

@@ -1,0 +1,95 @@
+---
+
+# product-properties
+product-properties:
+  pks_tls:
+    certificate: ((pks_tls.certificate))
+    private_key: ((pks_tls.private_key))
+  properties:
+    cloud_provider: 
+      type: vSphere
+      vsphere:
+        vcenter_master_creds:
+          identity: ((vcenter_user.username))
+          password: ((vcenter_user.password))
+        vcenter_dc: DearbornRoad
+        vcenter_ds: pcf-datastore
+        vcenter_ip: vcenter.21dr.gridbug.io
+        vcenter_vms: pks14_vms
+    network_selector:
+      type: flannel
+      flannel: 
+        pod_network_cidr: 10.200.0.0/16
+        service_cluster_cidr: 10.100.200.0/24
+    pks_api_hostname: pks.dr.gridbug.io
+    plan1_selector:
+      status: "Plan Active"
+      active:
+        allow_privileged_containers: true
+        description: "this is a small cluster"
+        master_az_placement: 
+        - AZ1
+        master_instances: 1
+        max_worker_instances: 50
+        name: small
+        worker_az_placement:
+        - AZ1
+        worker_instances: 3
+    plan2_selector:
+      status: "Plan Inactive"
+    plan3_selector:
+      status: "Plan Inactive"
+    plan4_selector:
+      status: "Plan Inactive"
+    plan5_selector:
+      status: "Plan Inactive"
+    plan6_selector:
+      status: "Plan Inactive"
+    plan7_selector:
+      status: "Plan Inactive"
+    plan8_selector:
+      status: "Plan Inactive"
+    plan9_selector:
+      status: "Plan Inactive"
+    plan10_selector:
+      status: "Plan Inactive"
+    pks-vrops: disabled
+    pks-vrli: disabled
+    proxy_selector: Disabled
+    log_sink_resources_deploy: enabled
+    metric_sink_resources_deploy: enabled
+    syslog_selector: disabled
+    telemetry_selector: disabled
+    uaa: internal
+    uaa_oidc: false
+    uaa_pks_cli_access_token_lifetime: 600
+    uaa_pks_cli_refresh_token_lifetime: 21600
+    wavefront: disabled
+    worker_max_in_flight: 1
+
+# network-properties
+network-properties:
+  network:
+    name: pks-infra
+  other_availability_zones:
+  - name: AZ1
+  service_network:
+    name: pks-services  # When using NSX-T, the "services" network is NOT required so here we can simply select the one as "network"
+  singleton_availability_zone:
+    name: AZ1
+
+# resource-config
+resource-config:
+  pivotal-container-service:
+    instances: automatic
+    persistent_disk: automatic
+    instance_type: automatic
+
+# errand-config
+errand-config:
+  delete-all-clusters: true
+  pks-nsx-t-precheck: false
+  smoke-tests: false
+  upgrade-all-service-instances: true
+  wavefront-alert-creation: false
+  wavefront-alert-deletion: false

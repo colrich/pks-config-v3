@@ -1,0 +1,27 @@
+---
+
+# Important Notes:
+# 1. The config under `/products/<PRODUCT_ALIAS>` must be compatible with `download-product` config file.
+#    Ref: http://docs.pivotal.io/platform-automation/v3.0/reference/inputs-outputs.html#download-product-config
+# 2. For OpsMan, we must not set `stemcell-iaas` while all others must set it with the right value
+# 3. The options available for `stemcell-iaas`: vsphere; vcloud; openstack; google; azure; aws
+
+products:
+
+  # ==== Ops Manager
+  opsman:
+    product-version: "2.5.2"
+    pivnet-product-slug: ops-manager
+    pivnet-api-token: ((pivnet_token))
+    pivnet-file-glob: "*vsphere*.ova"
+
+  # ==== Products
+
+  # PKS
+  pks:
+    product-version: "1.4.1"
+    pivnet-product-slug: pivotal-container-service
+    pivnet-api-token: ((pivnet_token))
+    pivnet-file-glob: "*.pivotal"
+    stemcell-iaas: vsphere
+

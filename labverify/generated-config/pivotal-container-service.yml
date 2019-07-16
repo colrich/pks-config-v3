@@ -1,0 +1,142 @@
+
+product-name: pivotal-container-service
+product-properties:
+  .pivotal-container-service.pks_tls:
+    value:
+      cert_pem: ((product-properties.pks_tls.certificate))
+      private_key_pem: ((product-properties.pks_tls.private_key))
+  .properties.cloud_provider:
+    value: vSphere
+  .properties.cloud_provider.vsphere.vcenter_dc:
+    value: DearbornRoad
+  .properties.cloud_provider.vsphere.vcenter_ds:
+    value: pcf-datastore
+  .properties.cloud_provider.vsphere.vcenter_ip:
+    value: vcenter.21dr.gridbug.io
+  .properties.cloud_provider.vsphere.vcenter_master_creds:
+    value:
+      identity: ((product-properties.properties.cloud_provider.vsphere.vcenter_master_creds.identity))
+      password: ((product-properties.properties.cloud_provider.vsphere.vcenter_master_creds.password))
+  .properties.cloud_provider.vsphere.vcenter_vms:
+    value: pks14_vms
+  .properties.log_sink_resources_deploy:
+    value: true
+  .properties.metric_sink_resources_deploy:
+    value: true
+  .properties.network_selector:
+    selected_option: flannel
+    value: flannel
+  .properties.network_selector.flannel.pod_network_cidr:
+    value: 10.200.0.0/16
+  .properties.network_selector.flannel.service_cluster_cidr:
+    value: 10.100.200.0/24
+  .properties.pks-vrli:
+    selected_option: disabled
+    value: disabled
+  .properties.pks-vrops:
+    selected_option: disabled
+    value: disabled
+  .properties.pks_api_hostname:
+    value: pks.dr.gridbug.io
+  .properties.plan1_selector:
+    selected_option: active
+    value: Plan Active
+  .properties.plan1_selector.active.allow_privileged_containers:
+    value: true
+  .properties.plan1_selector.active.description:
+    value: 'Example: This plan will configure a lightweight kubernetes cluster. Not
+      recommended for production workloads.'
+  .properties.plan1_selector.active.master_az_placement:
+    value:
+    - AZ1
+  .properties.plan1_selector.active.master_instances:
+    value: 1
+  .properties.plan1_selector.active.max_worker_instances:
+    value: 50
+  .properties.plan1_selector.active.name:
+    value: small
+  .properties.plan1_selector.active.worker_az_placement:
+    value:
+    - AZ1
+  .properties.plan1_selector.active.worker_instances:
+    value: 3
+  .properties.plan2_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan3_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan4_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan5_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan6_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan7_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan8_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan9_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.plan10_selector:
+    selected_option: inactive
+    value: Plan Inactive
+  .properties.proxy_selector:
+    selected_option: disabled
+    value: Disabled
+  .properties.syslog_selector:
+    selected_option: disabled
+    value: disabled
+  .properties.telemetry_selector:
+    selected_option: disabled
+    value: disabled
+  .properties.uaa:
+    selected_option: internal
+    value: internal
+  .properties.uaa_oidc:
+    value: false
+  .properties.uaa_pks_cli_access_token_lifetime:
+    value: 600
+  .properties.uaa_pks_cli_refresh_token_lifetime:
+    value: 21600
+  .properties.wavefront:
+    selected_option: disabled
+    value: disabled
+  .properties.worker_max_in_flight:
+    value: 1
+network-properties:
+  network:
+    name: pks-infra
+  other_availability_zones:
+  - name: AZ1
+  service_network:
+    name: pks-services
+  singleton_availability_zone:
+    name: AZ1
+resource-config:
+  pivotal-container-service:
+    instances: automatic
+    persistent_disk:
+      size_mb: automatic
+    instance_type:
+      id: automatic
+errand-config:
+  delete-all-clusters:
+    pre-delete-state: true
+  pks-nsx-t-precheck:
+    post-deploy-state: false
+  smoke-tests:
+    post-deploy-state: false
+  upgrade-all-service-instances:
+    post-deploy-state: true
+  wavefront-alert-creation:
+    post-deploy-state: false
+  wavefront-alert-deletion:
+    pre-delete-state: false
+
